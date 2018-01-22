@@ -15,7 +15,7 @@ module.exports = {
   // Production details
   output: {
     // When compiled for production, output file location
-    path: './src',
+    path: path.join(__dirname, './src/'),
     publicPath: '/',
     filename: 'bundle.js' // Its convention to use this name
   },
@@ -23,8 +23,8 @@ module.exports = {
   // Bundle lookup dir for included/imported modules
   // By default, bundler/webpack with search here for the scripts
   resolve: {
-    modulesDirectories: ['node_modules', 'src'],
-    extensions: ['', '.js', '.jsx']
+    modules: ['node_modules', 'src'],
+    extensions: ['*', '.js', '.jsx']
   },
 
   module: {
@@ -47,7 +47,7 @@ module.exports = {
         NODE_ENV: JSON.stringify('production')
       }
     }),
-    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({ sourceMap: true}),
     new webpack.NoErrorsPlugin(), // Makes sure Webpack will not compile if Errors
   ]
 };
