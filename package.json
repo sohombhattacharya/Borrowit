@@ -2,7 +2,7 @@
   "name": "borrowit",
   "version": "1.0.0",
   "description": "\"# Borrowit\"",
-  "main": "app.jsx",
+  "main": "App.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server -d --config webpack.dev.config.js --progress --colors",

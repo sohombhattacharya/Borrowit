@@ -8,7 +8,7 @@ const path = require('path');
 module.exports = {
   devtool: 'inline-source-map',
   entry: [
-    './src/app.jsx' // this file along with dependency libs will be compiled into one file and loaded
+    './src/App.jsx' // this file along with dependency libs will be compiled into one file and loaded
       // See index.html, you will see bundle.js embedded
   ],
 

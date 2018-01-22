@@ -10,7 +10,7 @@ module.exports = {
   entry: [
     'webpack-dev-server/client?http://127.0.0.1:3000/',
     'webpack/hot/only-dev-server',
-    './src/app.jsx' // If No Filename (./src/), its gonna look for `index.js`
+    './src/App.jsx' // If No Filename (./src/), its gonna look for `index.js`
   ],
 
   // Production details
