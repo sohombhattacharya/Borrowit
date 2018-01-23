@@ -9,10 +9,13 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="219938817049-o8ssg4a1osce7j3thnjk1kqfnahv54p6.apps.googleusercontent.com">
     <title>Borrowit</title>
 </head>
 
 <body>
+<div id="googleButton" class="g-signin2" data-onsuccess="onSignIn"></div>    
 <div id="app" class="container"/>
 <script src="/bundle.js"></script>
 </body>

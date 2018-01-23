@@ -4,8 +4,20 @@ class App extends Component {
         super(props);
         
     }
+
     render(){
-        return(<h3>Hello {this.props.name}</h3>);
+const responseGoogle = (response) => {
+  console.log(response);
+}
+        return(
+  <GoogleLogin
+    clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+    buttonText="Login"
+    onSuccess={responseGoogle}
+    onFailure={responseGoogle}
+  />,
+  document.getElementById('googleButton')
+);
         
         }
     }
