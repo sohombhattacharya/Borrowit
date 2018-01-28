@@ -6,39 +6,42 @@ import {
   Redirect,
   withRouter
 } from 'react-router-dom'
+import Login from "./Login.js"
+import {fakeAuth} from "./Constants.js"    
 
-////////////////////////////////////////////////////////////
-// 1. Click the public page
-// 2. Click the protected page
-// 3. Log in
-// 4. Click the back button, note the URL each time
+class App extends React.Component {
+    constructor(props){
+        super(props);
+        this.onSignIn = this.onSignIn.bind(this);
+    }
 
-const App = () => (
-  <Router>
-    <div>
-      <AuthButton/>
-      <ul>
-        <li><Link to="/public">Public Page</Link></li>
-        <li><Link to="/protected">Protected Page</Link></li>
-      </ul>
-      <Route path="/public" component={Public}/>
-      <Route path="/login" component={Login}/>
-      <PrivateRoute path="/protected" component={Protected}/>
-    </div>
-  </Router>
-)
-
-const fakeAuth = {
-  isAuthenticated: false,
-  authenticate(cb) {
-    this.isAuthenticated = true
-    setTimeout(cb, 100) // fake async
-  },
-  signout(cb) {
-    this.isAuthenticated = false
-    setTimeout(cb, 100)
-  }
+ onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 }
+    
+    render(){
+      return(<Router>
+        <div>
+          <AuthButton/>
+        <div class="g-signin2" data-onsuccess={this.onSignIn}></div>
+          <ul>
+            <li><Link to="/login">Login</Link></li>
+            <li><Link to="/home">Home</Link></li>
+          </ul>
+          <Route path="/login" component={Login}/>
+          <PrivateRoute path="/home" component={Protected}/>
+        </div>
+      </Router>)
+    }
+}
+
+
+
+
 
 const AuthButton = withRouter(({ history }) => (
   fakeAuth.isAuthenticated ? (
@@ -48,9 +51,10 @@ const AuthButton = withRouter(({ history }) => (
       }}>Sign out</button>
     </p>
   ) : (
-    <p>You are not logged in.</p>
+    <p></p>
   )
 ))
+
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (
@@ -65,42 +69,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   )}/>
 )
 
-const Public = () => <h3>Public</h3>
-const Protected = () => <h3>Protected</h3>
+const Protected = () => <h3>Logged In</h3>
 
-class Login extends React.Component {
-    constructor(props){
-        super(props);
-          this.state = {
-            redirectToReferrer: false
-          };
-    
-    }
-
-  login(){
-    fakeAuth.authenticate(() => {
-      this.setState({ redirectToReferrer: true })
-    })
-  }
-
-  render() {
-    const { from } = this.props.location.state || { from: { pathname: '/' } }
-    const { redirectToReferrer } = this.state
-    
-    if (redirectToReferrer) {
-      return (
-        <Redirect to={from}/>
-      )
-    }
-    
-    return (
-      <div>
-        <p>You must log in to view the page at {from.pathname}</p>
-        <button onClick={this.login}>Log in</button>
-      </div>
-    )
-  }
-}
 
 
 export default App
