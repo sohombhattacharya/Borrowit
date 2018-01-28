@@ -32,7 +32,7 @@ module.exports = {
       {
         test: /\.js[x]?$/,
         exclude: /node_modules/,
-        loaders: ['babel-loader?presets[]=react,presets[]=es2015']
+        loaders: ['babel-loader?presets[]=react,presets[]=es2015,presets[]=stage-3']
       },
         // I am using SASS as Transpiler for style sheets
       {test: /\.scss$/, loaders: ["style-loader", "css-loader", "sass-loader"]},
