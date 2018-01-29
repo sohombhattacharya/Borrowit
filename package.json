@@ -22,8 +22,11 @@
   "homepage": "https://github.com/sohombhattacharya/Borrowit#readme",
   "dependencies": {
     "express": "^4.16.2",
+    "fontawesome": "^4.7.2",
+    "google-auth-library": "^1.1.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-google-login": "^3.0.4",
     "react-router-dom": "^4.2.2"
   },
   "devDependencies": {

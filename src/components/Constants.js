@@ -1,12 +1,12 @@
-const fakeAuth = {
+const auth = {
   isAuthenticated: false,
-  authenticate(cb) {
+  authenticate() {
     this.isAuthenticated = true
   },
-  signout(cb) {
-    this.isAuthenticated = false
+  signout() {
+    this.isAuthenticated = false;
   }
 }
 
 
-export {fakeAuth}
+export {auth}

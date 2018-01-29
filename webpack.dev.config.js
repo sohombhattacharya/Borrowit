@@ -36,6 +36,10 @@ module.exports = {
       }
     ]
   },
+    
+node: {
+  fs: "empty"
+}, 
 
    // Server configs 
    // See https://webpack.js.org/configuration/dev-server/
