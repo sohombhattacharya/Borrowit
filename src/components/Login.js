@@ -32,7 +32,7 @@ class Login extends React.Component {
     }
      componentDidMount() {
       gapi.signin2.render('my-signin2', {
-        'scope': 'profile email',
+        'scope': 'https://www.googleapis.com/auth/plus.login',
         'width': 240,
         'height': 50,
         'longtitle': true,
