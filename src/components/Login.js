@@ -20,15 +20,16 @@ class Login extends React.Component {
    
     
      onSuccess(googleUser) {
-         console.log(googleUser);
       console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-      console.log(this.props)
-      let currentObj = this; 
         //BACKEND VERIFICATION
       auth.authenticate();
       console.log("Auth - " + auth.isAuthenticated);
       this.setState({ redirect: true });
-      currentObj.props.history.push("/home");
+//      currentObj.props.history.push("/home");
+this.props.history.push({
+  pathname: '/home',
+  state: { data: googleUser }
+})         
     }
      onFailure(error) {
       console.log(error);

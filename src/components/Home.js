@@ -24,7 +24,8 @@ class Home extends React.Component {
     this.props.history.push("/");
   }
   render() {
-
+        if (this.props.location.state.hasOwnProperty('data'))
+            console.log(this.props.location.state.data);
             return (<div><button type="button" class="btn btn-danger" onClick={this.signOut}>Sign Out</button></div>);
 
       
