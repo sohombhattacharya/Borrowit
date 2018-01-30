@@ -11,7 +11,9 @@ import {auth} from "./Constants.js"
 class Login extends React.Component {
     constructor(props){
         super(props);
-        console.log(this);
+        this.state = {
+            redirect: false
+        }
         this.onSuccess = this.onSuccess.bind(this);
         
     }
@@ -25,6 +27,7 @@ class Login extends React.Component {
         //BACKEND VERIFICATION
       auth.authenticate();
       console.log("Auth - " + auth.isAuthenticated);
+      this.setState({ redirect: true });
       currentObj.props.history.push("/home");
     }
      onFailure(error) {
@@ -43,9 +46,12 @@ class Login extends React.Component {
     }
   render() {
           const { from } = this.props.location.state || { from: { pathname: '/' } }
-
+        if (this.state.redirect){
+            return (<Redirect to={from}/>);
+        }
             console.log(from);
-            return (<div><div id="my-signin2"></div></div>);
+            return (<div><h2>Please login to view {from.pathname}</h2>
+                    <div id="my-signin2"></div></div>);
 
       
       

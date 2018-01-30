@@ -6,6 +6,7 @@ import {
   Redirect,
   withRouter
 } from 'react-router-dom'
+import { Switch } from 'react-router'    
 import Login from "./Login.js"
 import {auth} from "./Constants.js" 
 import Home from "./Home.js"
@@ -20,22 +21,16 @@ class App extends React.Component {
       return(
   <Router>
     <div>
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Rent A Shirt</a>
-    </div>
-    <ul class="nav navbar-nav">
-        <li><Link to="/public">Public Page</Link></li>   
-        <li><Link to="/home">Home</Link></li>
-        <li><Link to="/login">Login Page</Link></li> 
-    </ul>
-  </div>
-</nav>
+    <Header />
+    <hr/>
+    <hr/>      
+    <Switch>
+      <Route exact path="/" component={Public}/>
       <Route path="/login" component={Login}/>
-      <Route path="/public" component={Public}/>
       <PrivateRoute path="/home" component={Home}/>
+    </Switch>
     </div>
+          
   </Router>
             )
     }
@@ -55,7 +50,25 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 )
 
 const Public = () => <h3>Public page</h3>
-
+const Header = () => (<div><nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a class="navbar-brand" href="#">Rent A Shirt</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><Link to="/">Public Page</Link></li>   
+        <li><Link to="/home">Home</Link></li>
+        <li><Link to="/login">Login Page</Link></li> 
+      </ul>
+    </div>
+  </div>
+</nav></div>) 
 
 
 export default App

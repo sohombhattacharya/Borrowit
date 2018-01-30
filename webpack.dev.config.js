@@ -17,6 +17,7 @@ module.exports = {
   output: {
     // When compiled for production, output file location
     path: path.join(__dirname, 'public'),
+    publicPath: "/",
     filename: 'bundle.js' // Its convention to use this name
   },
 
