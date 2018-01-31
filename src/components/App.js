@@ -4,7 +4,8 @@ import {
   Route,
   Link,
   Redirect,
-  withRouter
+  withRouter,
+  HashRouter
 } from 'react-router-dom'
 import { Switch } from 'react-router'    
 import Login from "./Login.js"
@@ -14,25 +15,58 @@ import Home from "./Home.js"
 class App extends React.Component {
     constructor(props){
         super(props);
-        console.log(auth.isAuthenticated);
+        this.state = {
+            loggedIn: false 
+        }
+        this.onSuccess = this.onSuccess.bind(this);
+        this.onFailure = this.onFailure.bind(this);
+        this.signOut = this.signOut.bind(this);
     }
-  
+   signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+       let currThis = this; 
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    currThis.setState({ loggedIn: false });    
+    });
+  }
+    
+     onSuccess(googleUser) {
+      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+        //BACKEND VERIFICATION
+      this.setState({ loggedIn: true });
+//      currentObj.props.history.push("/home");       
+    }
+     onFailure(error) {
+      console.log(error);
+    }    
+    
     render(){
-      return(
-  <Router>
-    <div>
-    <Header />
-    <hr/>
-    <hr/>      
-    <Switch>
-      <Route exact path="/" component={Public}/>
-      <Route path="/login" component={Login}/>
-      <PrivateRoute path="/home" component={Home}/>
-    </Switch>
-    </div>
-          
-  </Router>
-            )
+        
+        if (!this.state.loggedIn){
+            return(
+                <Login onSuccess={this.onSuccess} onFailure={this.onFailure} />
+                  );
+        }
+        else{
+            return(
+                   <Home signOut={this.signOut} />
+                  );
+        }
+//        
+//      return(
+//  <HashRouter>
+//    <div>
+//    <Header />
+//    <hr/>
+//    <hr/>      
+//      <Route exact path="/" component={Public}/>
+//      <Route path="/login" component={Login}/>
+//      <PrivateRoute path="/home" component={Home}/>
+//    </div>
+//          
+//  </HashRouter>
+//            )
     }
 }
 
