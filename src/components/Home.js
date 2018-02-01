@@ -11,7 +11,7 @@ import {auth} from "./Constants.js"
 class Home extends React.Component {
     
     uploadButton(){
-cloudinary.openUploadWidget({upload_preset: 'fjpbxars', cloud_name: "dycjqocml", cropping: 'server', folder: 'user_photos'}, 
+cloudinary.openUploadWidget({upload_preset: 'fjpbxars', cloud_name: "dycjqocml", cropping: 'server', folder: 'user_photos', sources: [ 'local', 'url', 'dropbox', 'facebook', 'instagram']}, 
   function(error, result) {console.log(error, result)});
     
     
