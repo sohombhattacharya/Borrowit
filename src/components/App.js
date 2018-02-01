@@ -7,7 +7,7 @@ import {
   withRouter,
   HashRouter
 } from 'react-router-dom'
-import { Switch } from 'react-router'    
+import { Switch } from 'react-router'
 import Login from "./Login.js"
 import {auth} from "./Constants.js" 
 import Home from "./Home.js"
@@ -24,6 +24,8 @@ class App extends React.Component {
     }
    signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
+       console.log();
+       console.log(auth2.isSignedIn.get());
        let currThis = this; 
     auth2.signOut().then(function () {
       console.log('User signed out.');
