@@ -8,5 +8,4 @@ const auth = {
   }
 }
 
-
 export {auth}

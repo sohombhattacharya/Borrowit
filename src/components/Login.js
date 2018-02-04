@@ -7,8 +7,16 @@ import {
   withRouter
 } from 'react-router-dom'
 import {auth} from "./Constants.js"
-    
+
 class Login extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+    redirectToReferrer: false
+  }
+    this.onSuccess = this.onSuccess.bind(this);
+      this.onFailure = this.onFailure.bind(this);      
+  }
      componentDidMount() {
       gapi.signin2.render('my-signin2', {
         'scope': 'https://www.googleapis.com/auth/plus.login',
@@ -16,18 +24,39 @@ class Login extends React.Component {
         'height': 50,
         'longtitle': true,
         'theme': 'dark',
-        'onsuccess': this.props.onSuccess,
-        'onfailure': this.props.onFailure
+        'onsuccess': this.onSuccess,
+        'onfailure': this.onFailure
       });
     }
+     onSuccess(googleUser) {
+      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+        console.log("Info - ", googleUser);
+             auth.authenticate();
+      this.setState({ redirectToReferrer: true });
+         //BACKEND VERIFICATION
+        
+         //CHANGE STATE
+    }
+     onFailure(error) {
+      console.log(error);
+    }    
   render() {
-            return (
-                <div>
-                <h2>Please login</h2>
-                <div id="my-signin2"></div>
-                </div>
-                   
-                   );
+    const { from } = this.props.location.state || { from: { pathname: '/' } }
+    const { redirectToReferrer } = this.state
+    console.log(from);
+    
+    if (redirectToReferrer) {
+      return (
+        <Redirect to={from} />
+      )
+    }
+    
+    return (
+      <div>
+        <p>You must log in to view the page at {from.pathname}</p>
+        <div><div id="my-signin2"></div></div>
+      </div>
+    )
   }
 }
 

@@ -5,71 +5,37 @@ import {
   Link,
   Redirect,
   withRouter,
-  HashRouter
+    Switch
 } from 'react-router-dom'
-import { Switch } from 'react-router'
+import PostItem from "./PostItem.js"
+import {auth} from "./Constants.js"
+import AuthButton from "./AuthButton.js"    
 import Login from "./Login.js"
-import {auth} from "./Constants.js" 
-import Home from "./Home.js"
-
-class App extends React.Component {
+import Header from "./Header.js"
+    
+class App extends React.Component{
+    
     constructor(props){
         super(props);
-        this.state = {
-            loggedIn: false 
-        }
-        this.onSuccess = this.onSuccess.bind(this);
-        this.onFailure = this.onFailure.bind(this);
-        this.signOut = this.signOut.bind(this);
     }
-   signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-       console.log();
-       console.log(auth2.isSignedIn.get());
-       let currThis = this; 
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
-    currThis.setState({ loggedIn: false });    
-    });
+    
+  render(){
+      return(
+      <Router>
+    <div>
+    <Header />
+    <hr/>
+    <hr/>          
+    <Switch>
+      <Route exact path="/" component={Public}/>
+      <Route path="/login" component={Login}/>
+      <PrivateRoute path="/protected" component={PostItem}/>
+    </Switch>
+
+    </div>
+    </Router>
+          );
   }
-    
-     onSuccess(googleUser) {
-      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-        //BACKEND VERIFICATION
-      this.setState({ loggedIn: true });
-//      currentObj.props.history.push("/home");       
-    }
-     onFailure(error) {
-      console.log(error);
-    }    
-    
-    render(){
-        
-        if (!this.state.loggedIn){
-            return(
-                <Login onSuccess={this.onSuccess} onFailure={this.onFailure} />
-                  );
-        }
-        else{
-            return(
-                   <Home signOut={this.signOut} />
-                  );
-        }
-//        
-//      return(
-//  <HashRouter>
-//    <div>
-//    <Header />
-//    <hr/>
-//    <hr/>      
-//      <Route exact path="/" component={Public}/>
-//      <Route path="/login" component={Login}/>
-//      <PrivateRoute path="/home" component={Home}/>
-//    </div>
-//          
-//  </HashRouter>
-//            )
-    }
 }
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -85,26 +51,9 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   )}/>
 )
 
-const Public = () => <h3>Public page</h3>
-const Header = () => (<div><nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span> 
-      </button>
-      <a class="navbar-brand" href="#">Rent A Shirt</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li><Link to="/">Public Page</Link></li>   
-        <li><Link to="/home">Home</Link></li>
-        <li><Link to="/login">Login Page</Link></li> 
-      </ul>
-    </div>
-  </div>
-</nav></div>) 
+const Public = () => <h3>Public</h3>
+const Protected = () => <h3>Protected</h3>
+
 
 
 export default App
