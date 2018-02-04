@@ -12,6 +12,8 @@ import {auth} from "./Constants.js"
 import AuthButton from "./AuthButton.js"    
 import Login from "./Login.js"
 import Header from "./Header.js"
+import Market from "./Market.js"
+
     
 class App extends React.Component{
     
@@ -23,13 +25,11 @@ class App extends React.Component{
       return(
       <Router>
     <div>
-    <Header />
-    <hr/>
-    <hr/>          
+    <Header />       
     <Switch>
-      <Route exact path="/" component={Public}/>
+      <Route exact path="/" component={Market}/>
       <Route path="/login" component={Login}/>
-      <PrivateRoute path="/protected" component={PostItem}/>
+      <PrivateRoute path="/sellItem" component={PostItem}/>
     </Switch>
 
     </div>
@@ -50,10 +50,5 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     )
   )}/>
 )
-
-const Public = () => <h3>Public</h3>
-const Protected = () => <h3>Protected</h3>
-
-
 
 export default App

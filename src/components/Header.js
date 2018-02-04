@@ -11,7 +11,7 @@ import AuthButton from "./AuthButton.js"
 class Header extends React.Component {
     render() {
         return(
-<div><nav class="navbar navbar-default navbar-fixed-top">
+<div><nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -24,7 +24,7 @@ class Header extends React.Component {
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li><Link to="/">Market</Link></li>
-        <li><Link to="/protected">Protected Page</Link></li>
+        <li><Link to="/sellItem">Sell Item</Link></li>
         <AuthButton/>  
       </ul>            
     </div>

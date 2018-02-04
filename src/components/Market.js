@@ -8,11 +8,11 @@ import {
 } from 'react-router-dom'
 import {auth} from "./Constants.js"
     
-class Home extends React.Component {
+class Market extends React.Component {
+
     render() {
-        console.log(this);
-        return (<div></div>);
-  }
+        return(<div><p>Market</p></div>)
+    }
 }
 
-export default Home
+export default Market
