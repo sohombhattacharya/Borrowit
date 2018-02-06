@@ -29,7 +29,8 @@ class App extends React.Component{
     <Switch>
       <Route exact path="/" component={Market}/>
       <Route path="/login" component={Login}/>
-      <PrivateRoute path="/sellItem" component={PostItem}/>
+      <PrivateRoute path="/sellItem" component={PostItem}/> 
+// HAVE TO SEND IN GOOGLE USER INFO AS PROPS TO COMPONENTS 
     </Switch>
 
     </div>
