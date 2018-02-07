@@ -1,6 +1,7 @@
 const auth = {
   loggedIn: false,
   user: null,
+  gapi: null,
   isAuthenticated(){
     if (this.loggedIn){
         //BACKEND VERIFY USER

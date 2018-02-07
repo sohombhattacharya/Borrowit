@@ -15,18 +15,30 @@ class PostItem extends React.Component {
             images: [],
             name: "", 
             description: "", 
-            ratePerDay: 0.0
+            rate: 0.0
         }
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-
+        this.handleRateChange = this.handleRateChange.bind(this);
+        this.uploadButton = this.uploadButton.bind(this);
+        
     }
     
     uploadButton(){
-cloudinary.openUploadWidget({upload_preset: 'fjpbxars', cloud_name: "dycjqocml", thumbnails: '.upload_multiple_images_holder', form: '.upload_multiple_images_holder', thumbnail_transformation: [ {width: 200, height: 200, crop: 'fit'} ], multiple: true, cropping: 'server', theme: "minimal", folder: 'user_photos', sources: [ 'local', 'url', 'dropbox', 'facebook', 'instagram']}, 
-  function(error, result) {console.log(error, result)});
-    
+        let currObj = this; 
+cloudinary.openUploadWidget({upload_preset: 'fjpbxars', cloud_name: "dycjqocml", thumbnails: '.upload_multiple_images_holder', form: '.upload_multiple_images_holder', thumbnail_transformation: [ {width: 200, height: 200, crop: 'fit'} ], multiple: true, theme: "minimal", folder: auth.gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getId(), sources: [ 'local', 'url', 'dropbox', 'facebook', 'instagram']}, 
+  function(error, result) {
+    if (!error){
+        console.log(result);  
+        console.log("image uploaded, this - ", currObj); 
+        console.log(currObj.state);
+        let imagesList = currObj.state.images; 
+        imagesList.push(result[0].secure_url);
+        currObj.setState({images: imagesList});
+    }                          
+                          
+                          });
     
     }
   handleNameChange(event) {
@@ -35,26 +47,32 @@ cloudinary.openUploadWidget({upload_preset: 'fjpbxars', cloud_name: "dycjqocml",
   handleDescriptionChange(event) {
     this.setState({description: event.target.value});
   }    
-
+  handleRateChange(event) {
+    this.setState({rate: event.target.value});
+  }    
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
+      //POST ITEM TO API WITH STATE PARAMS
     event.preventDefault();
   }    
     render() {
-        console.log("in post item", auth.user);
         return (
-            <div>
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Name:
-          <input type="text" value={this.state.name} onChange={this.handleNameChange} />
-        </label>
-        <label>
-          Description:
-          <input type="text" value={this.state.description} onChange={this.handleDescriptionChange} />
-        </label>           
-           <div class="upload_multiple_images_holder"><button type="button" class="btn btn-danger" onClick={this.uploadButton}>Upload</button></div>         
-        <input type="submit" value="Submit" />
+            <div class="container-fluid">
+      <form onSubmit={this.handleSubmit} width="auto">
+        <div class="form-group">
+        <label>Name:</label>
+        <input type="text" class="form-control" value={this.state.name} onChange={this.handleNameChange} />
+            </div>
+        <div class="form-group">    
+        <label>Description:</label>
+          <textarea type="text" class="form-control" value={this.state.description} onChange={this.handleDescriptionChange} />
+            </div>
+        <div class="form-group">    
+        <label>Rate Per Day:</label>            
+        <input type='number' min="0" step='0.01' value='0.00' placeholder='0.00' class="form-control" value={this.state.rate} onChange={this.handleRateChange}/>
+            </div>
+           <div class="upload_multiple_images_holder"><button type="button" class="btn btn-success" onClick={this.uploadButton}>Upload Pictures</button></div>         
+            <br />
+        <button type="submit" class="btn btn-primary">Post Item</button>    
       </form>            
             </div>
         ); 

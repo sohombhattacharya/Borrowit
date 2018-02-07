@@ -30,12 +30,10 @@ class Login extends React.Component {
     }
      onSuccess(googleUser) {
       console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-        console.log("Info - ", googleUser);
+      auth.gapi = gapi; 
         if(auth.authenticate(googleUser)){
             this.setState({ redirectToReferrer: true });
         }
-        
-         //CHANGE STATE
     }
      onFailure(error) {
       console.log(error);

@@ -22,7 +22,6 @@ class App extends React.Component{
     }
     
   render(){
-      console.log("in App", auth.user);
       return(
       <Router>
     <div>
