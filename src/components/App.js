@@ -22,6 +22,7 @@ class App extends React.Component{
     }
     
   render(){
+      console.log("in App", auth.user);
       return(
       <Router>
     <div>
@@ -30,7 +31,6 @@ class App extends React.Component{
       <Route exact path="/" component={Market}/>
       <Route path="/login" component={Login}/>
       <PrivateRoute path="/sellItem" component={PostItem}/> 
-// HAVE TO SEND IN GOOGLE USER INFO AS PROPS TO COMPONENTS 
     </Switch>
 
     </div>
@@ -41,7 +41,7 @@ class App extends React.Component{
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (
-    auth.isAuthenticated ? (
+    auth.isAuthenticated() ? (
       <Component {...props}/>
     ) : (
       <Redirect to={{

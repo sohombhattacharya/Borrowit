@@ -31,9 +31,8 @@ class Login extends React.Component {
      onSuccess(googleUser) {
       console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
         console.log("Info - ", googleUser);
-             auth.authenticate();
-      this.setState({ redirectToReferrer: true });
-         //BACKEND VERIFICATION
+        if(auth.authenticate(googleUser))
+            this.setState({ redirectToReferrer: true });
         
          //CHANGE STATE
     }
@@ -47,7 +46,7 @@ class Login extends React.Component {
     
     if (redirectToReferrer) {
       return (
-        <Redirect to={from} />
+        <Redirect to={from}/>
       )
     }
     

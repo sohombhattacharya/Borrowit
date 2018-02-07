@@ -14,7 +14,8 @@ class PostItem extends React.Component {
         this.state = {
             images: [],
             name: "", 
-            description: ""
+            description: "", 
+            ratePerDay: 0.0
         }
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
@@ -40,11 +41,11 @@ cloudinary.openUploadWidget({upload_preset: 'fjpbxars', cloud_name: "dycjqocml",
     event.preventDefault();
   }    
     render() {
+        console.log("in post item", auth.user);
         return (
             <div>
       <form onSubmit={this.handleSubmit}>
         <label>
-        
           Name:
           <input type="text" value={this.state.name} onChange={this.handleNameChange} />
         </label>
