@@ -14,7 +14,7 @@ class AuthButton extends React.Component{
         this.signout = this.signout.bind(this);
     }
     signout(){
-        var auth2 = auth.user.getAuthInstance();
+        var auth2 = gapi.auth2.getAuthInstance();
         let currObj = this;
         auth2.signOut().then(function () {
           console.log('User signed out.');
