@@ -12,7 +12,7 @@ class PostItem extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            images: [],
+            images: {},
             name: "", 
             description: "", 
             rate: 0.0
@@ -21,10 +21,16 @@ class PostItem extends React.Component {
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleRateChange = this.handleRateChange.bind(this);
-        this.uploadButton = this.uploadButton.bind(this);
+        this.uploadButton = this.uploadButton.bind(this);     
         
     }
-    
+    componentDidMount(){
+$(document).on('cloudinarywidgetdeleted', function(e, data) {
+    let imagesDict = this.state.images; 
+    delete imagesDict[data.public_id]; 
+    this.setState({images: imagesDict});
+}.bind(this));     
+    }
     uploadButton(){
         let currObj = this; 
 cloudinary.openUploadWidget({upload_preset: 'fjpbxars', cloud_name: "dycjqocml", thumbnails: '.upload_multiple_images_holder', form: '.upload_multiple_images_holder', thumbnail_transformation: [ {width: 200, height: 200, crop: 'fit'} ], multiple: true, theme: "minimal", folder: auth.gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getId(), sources: [ 'local', 'url', 'dropbox', 'facebook', 'instagram']}, 
@@ -33,11 +39,10 @@ cloudinary.openUploadWidget({upload_preset: 'fjpbxars', cloud_name: "dycjqocml",
         console.log(result);  
         console.log("image uploaded, this - ", currObj); 
         console.log(currObj.state);
-        let imagesList = currObj.state.images; 
-        imagesList.push(result[0].secure_url);
-        currObj.setState({images: imagesList});
+        let imagesDict = currObj.state.images; 
+        imagesDict[result[0].public_id] = result[0].secure_url;
+        currObj.setState({images: imagesDict});
     }                          
-                          
                           });
     
     }

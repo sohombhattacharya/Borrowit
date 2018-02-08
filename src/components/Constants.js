@@ -18,8 +18,13 @@ const auth = {
   signout() {
     this.user = null;
     this.loggedIn = false; 
+  },
+  getUserID(){
+        
+      if (this.gapi)
+          return this.gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getId();
+      return null;
   }
-
 }
 
 export {auth}
