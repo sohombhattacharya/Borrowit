@@ -12,6 +12,7 @@ class PostItem extends React.Component {
     constructor(props){
         super(props);
         this.state = {
+            imageLimit: 4,
             images: {},
             name: "", 
             description: "", 
@@ -33,7 +34,7 @@ $(document).on('cloudinarywidgetdeleted', function(e, data) {
     }
     uploadButton(){
         let currObj = this; 
-cloudinary.openUploadWidget({upload_preset: 'fjpbxars', cloud_name: "dycjqocml", thumbnails: '.upload_multiple_images_holder', form: '.upload_multiple_images_holder', thumbnail_transformation: [ {width: 200, height: 200, crop: 'fit'} ], multiple: true, theme: "minimal", folder: auth.gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getId(), sources: [ 'local', 'url', 'dropbox', 'facebook', 'instagram']}, 
+cloudinary.openUploadWidget({upload_preset: 'fjpbxars', cloud_name: "dycjqocml", thumbnails: '.upload_multiple_images_holder', form: '.upload_multiple_images_holder', thumbnail_transformation: [ {width: 200, height: 350, crop: 'limit'} ], max_image_width: 200, max_image_height: 350,  multiple: true, theme: "minimal", folder: auth.gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getId(), sources: [ 'local', 'url', 'dropbox', 'facebook', 'instagram']}, 
   function(error, result) {
     if (!error){
         console.log(result);  
@@ -60,6 +61,13 @@ cloudinary.openUploadWidget({upload_preset: 'fjpbxars', cloud_name: "dycjqocml",
     event.preventDefault();
   }    
     render() {
+        var uploadImageClass = "btn btn-success active";
+        console.log(Object.keys(this.state.images).length);
+        if (Object.keys(this.state.images).length >= this.state.imageLimit){
+            console.log("disabled"); 
+            uploadImageClass = "btn btn-success disabled";
+        }
+        
         return (
             <div class="container-fluid">
       <form onSubmit={this.handleSubmit} width="auto">
@@ -75,7 +83,7 @@ cloudinary.openUploadWidget({upload_preset: 'fjpbxars', cloud_name: "dycjqocml",
         <label>Rate Per Day:</label>            
         <input type='number' min="0" step='0.01' value='0.00' placeholder='0.00' class="form-control" value={this.state.rate} onChange={this.handleRateChange}/>
             </div>
-           <div class="upload_multiple_images_holder"><button type="button" class="btn btn-success" onClick={this.uploadButton}>Upload Pictures</button></div>         
+           <div class="upload_multiple_images_holder"><button type="button" class={uploadImageClass} onClick={this.uploadButton}>Upload Picture</button></div>         
             <br />
         <button type="submit" class="btn btn-primary">Post Item</button>    
       </form>            

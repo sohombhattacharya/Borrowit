@@ -50,7 +50,7 @@ class Market extends React.Component {
     }
 
     render() {
-        return(<div><CarouselList items={this.state.items} /></div>)
+        return(<div><CarouselList items={this.state.items}/></div>)
     }
 }
 
