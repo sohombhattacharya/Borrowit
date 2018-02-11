@@ -7,7 +7,7 @@ import {
   withRouter
 } from 'react-router-dom'
 import {auth} from "./Constants.js"
-import CarouselList from "./CarouselList.js"    
+import ItemList from "./ItemList.js"    
     
 class Market extends React.Component {
     
@@ -50,7 +50,7 @@ class Market extends React.Component {
     }
 
     render() {
-        return(<div><CarouselList items={this.state.items}/></div>)
+        return(<div><ItemList items={this.state.items}/></div>)
     }
 }
 

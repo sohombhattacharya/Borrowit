@@ -34,7 +34,7 @@ $(document).on('cloudinarywidgetdeleted', function(e, data) {
     }
     uploadButton(){
         let currObj = this; 
-cloudinary.openUploadWidget({upload_preset: 'fjpbxars', cloud_name: "dycjqocml", thumbnails: '.upload_multiple_images_holder', form: '.upload_multiple_images_holder', thumbnail_transformation: [ {width: 200, height: 350, crop: 'limit'} ], max_image_width: 200, max_image_height: 350,  multiple: true, theme: "minimal", folder: auth.gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getId(), sources: [ 'local', 'url', 'dropbox', 'facebook', 'instagram']}, 
+cloudinary.openUploadWidget({upload_preset: 'fjpbxars', cloud_name: "dycjqocml", thumbnails: '.upload_multiple_images_holder', form: '.upload_multiple_images_holder', thumbnail_transformation: [ {width: 200, height: 350, crop: 'fit'} ], multiple: true, theme: "minimal", folder: auth.gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getId(), sources: [ 'local', 'url', 'dropbox', 'facebook', 'instagram']}, 
   function(error, result) {
     if (!error){
         console.log(result);  
