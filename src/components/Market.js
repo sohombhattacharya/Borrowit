@@ -18,27 +18,27 @@ class Market extends React.Component {
             items: [
                 {
                     id: 123,
-                    thumbnail: "thumbnail.jpeg", 
                     name: "test", 
                     description: "test description", 
                     rate: 245.32,
-                    pic: "actual.jpeg"
+                    image: "actual.jpeg",
+                    location: null
                 },
                 {
                     id: 2345,
-                    thumbnail: "thumbnail.jpeg", 
                     name: "test1", 
                     description: "test description", 
                     rate: 245.32,
-                    pic: "actual.jpeg"
+                    pic: "actual.jpeg",
+                    location: null
                 },
                 {
                     id: 351,
-                    thumbnail: "thumbnail2.jpeg", 
                     name: "test2", 
                     description: "test description", 
                     rate: 245.32,
-                    pic: "actual.jpeg"
+                    pic: "actual.jpeg",
+                    location: null
                 }                
             ]
         
