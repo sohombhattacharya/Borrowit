@@ -18,26 +18,26 @@ class Market extends React.Component {
             items: [
                 {
                     id: 123,
-                    name: "test", 
-                    description: "test description", 
-                    rate: 245.32,
-                    image: "actual.jpeg",
+                    name: "Item1", 
+                    description: "item1 description", 
+                    rate: 5.50,
+                    src: "https://res.cloudinary.com/dycjqocml/image/upload/c_fit,h_350,w_200/v1518389085/107148825167274594085/stasmiirabgibqlhza0x.jpg",
                     location: null
                 },
                 {
                     id: 2345,
-                    name: "test1", 
-                    description: "test description", 
-                    rate: 245.32,
-                    pic: "actual.jpeg",
+                    name: "Item2", 
+                    description: "item2 description", 
+                    rate: 6.70,
+                    src: "https://res.cloudinary.com/dycjqocml/image/upload/c_fit,h_350,w_200/v1518389085/107148825167274594085/stasmiirabgibqlhza0x.jpg",
                     location: null
                 },
                 {
                     id: 351,
-                    name: "test2", 
-                    description: "test description", 
-                    rate: 245.32,
-                    pic: "actual.jpeg",
+                    name: "Item3", 
+                    description: "item3 description", 
+                    rate: 10,
+                    src: "https://res.cloudinary.com/dycjqocml/image/upload/c_fit,h_350,w_200/v1518389085/107148825167274594085/stasmiirabgibqlhza0x.jpg",
                     location: null
                 }                
             ]
@@ -50,7 +50,18 @@ class Market extends React.Component {
     }
 
     render() {
-        return(<div><ItemList items={this.state.items}/></div>)
+        return(
+            
+            <div>
+            <div align="center">
+                <p>Filter options</p>
+                <p>Search box</p>
+            </div>
+            <ItemList items={this.state.items}/>
+            </div>
+              
+              
+              );
     }
 }
 
