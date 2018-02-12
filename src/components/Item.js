@@ -19,11 +19,11 @@ class Item extends React.Component {
         let item = this.props.item; 
         return(
             <div>
-<div style={afterStyle}>
+<div style={afterStyle} class="col-sm">
 <p style={postStyle}>
 <img src={item.src}  border="1px" class="responsive" hspace="50"/>
 </p>
-<div>
+<div class="col-sm">
 <p>Item name: {item.name}</p>
 <br/>
 <p>Description: {item.description}</p>
