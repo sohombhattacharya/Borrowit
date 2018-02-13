@@ -21,7 +21,7 @@ class Market extends React.Component {
                     name: "Item1", 
                     description: "item1 description", 
                     rate: 5.50,
-                    src: "http://res.cloudinary.com/dycjqocml/image/upload/c_fit,h_275,w_150/v1518491164/107148825167274594085/pkkrk2nmv4pk7mu4vuxn.jpg",
+                    src: "http://res.cloudinary.com/dycjqocml/image/upload/c_fit,h_200,w_200/v1518491646/107148825167274594085/zjaydeutwwopefmtkgsu.jpg",
                     location: null
                 },
                 {
@@ -29,7 +29,7 @@ class Market extends React.Component {
                     name: "Item2", 
                     description: "item2 description", 
                     rate: 6.70,
-                    src: "http://res.cloudinary.com/dycjqocml/image/upload/c_fit,h_275,w_150/v1518491164/107148825167274594085/pkkrk2nmv4pk7mu4vuxn.jpg",
+                    src: "http://res.cloudinary.com/dycjqocml/image/upload/c_fit,h_200,w_200/v1518491646/107148825167274594085/zjaydeutwwopefmtkgsu.jpg",
                     location: null
                 },
                 {
